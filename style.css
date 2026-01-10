@@ -4,33 +4,21 @@ body {
     padding: 20px;
 }
 
-.print {
-    max-width: 80mm;
+.input-section {
+    max-width: 400px;
     margin: auto;
     background: white;
     padding: 10px;
-}
-
-h1 {
-    text-align: center;
-    font-size: 26pt;
-    color: #d32f2f;
-    margin-bottom: 10px;
-}
-
-label {
-    display: block;
-    margin-top: 10px;
-    font-size: 14pt;
+    border-radius: 5px;
 }
 
 input, button {
     width: 100%;
     padding: 6px;
     margin-top: 5px;
+    font-size: 14pt;
     border-radius: 4px;
     border: 1px solid #ccc;
-    font-size: 14pt;
 }
 
 button {
@@ -39,23 +27,13 @@ button {
     border: none;
     cursor: pointer;
 }
-
-button:hover {
-    background: #b71c1c;
-}
-
-#clienteRecibo {
-    text-align: center;
-    margin: 10px 0;
-    font-size: 16pt;
-    font-weight: bold;
-}
+button:hover { background: #b71c1c; }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 16pt;
     margin-top: 10px;
+    font-size: 16pt;
 }
 
 th, td {
@@ -71,8 +49,31 @@ th, td {
     margin-top: 10px;
 }
 
+/* Recibo para impressão */
+.reciboPrint {
+    display: none; /* invisível na tela */
+    max-width: 80mm;
+    margin: auto;
+    background: white;
+    padding: 10px;
+}
+
+.reciboPrint h1 {
+    text-align: center;
+    font-size: 26pt;
+    color: #d32f2f;
+    margin-bottom: 10px;
+}
+
+#nomeRecibo {
+    font-size: 16pt;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 @media print {
     body * { visibility: hidden; }
-    .print, .print * { visibility: visible; }
-    .print { width: 80mm; font-size: 16pt; }
+    .reciboPrint, .reciboPrint * { visibility: visible; }
+    .reciboPrint { width: 80mm; font-size: 16pt; }
 }
