@@ -4,58 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recibo NFC-e - Hayama Sushi</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: monospace; padding: 20px; background: #f2f2f2; }
+input, button { width: 100%; padding: 6px; margin-top: 5px; font-size: 14pt; }
+button { background: #d32f2f; color: white; border: none; cursor: pointer; border-radius:4px; }
+button:hover { background: #b71c1c; }
+table { width: 100%; border-collapse: collapse; font-size: 16pt; margin-top:10px;}
+th, td { border-bottom:1px dashed #000; padding:4px; text-align:left;}
+#reciboImprimir { display:none; max-width:80mm; background:white; padding:10px;}
+h1 { text-align:center; font-size:22pt; color:#d32f2f; margin-bottom:10px;}
+.total { font-size:18pt; font-weight:bold; text-align:right; margin-top:10px;}
+#clienteRecibo { font-size:16pt; text-align:center; margin:10px 0;}
+@media print {
+  body * { visibility:hidden; }
+  #reciboImprimir, #reciboImprimir * { visibility: visible; }
+}
+</style>
 </head>
 <body>
 
-<div class="print">
+<h2>Adicionar itens para NFC-e</h2>
+
+<label>Nome do cliente:</label>
+<input id="nome" placeholder="Ex: João da Silva">
+
+<label>Nome do item:</label>
+<input id="item" placeholder="Ex: Sushi de Salmão">
+
+<label>Quantidade:</label>
+<input id="qtd" type="number" value="1" min="1">
+
+<label>Valor unitário:</label>
+<input id="valor" type="number" placeholder="Ex: 20.00" step="0.01">
+
+<button onclick="adicionar()">Adicionar Item</button>
+
+<table id="lista">
+<tr><th>QUANTIDADE</th><th>ITEM</th><th>VALOR</th></tr>
+</table>
+
+<p class="total" id="total">TOTAL: R$ 0,00</p>
+
+<button onclick="imprimir()">IMPRIMIR NFC-e</button>
+
+<!-- Recibo para impressão -->
+<div id="reciboImprimir">
     <h1>RETIRADA</h1>
-
-    <label>Nome da pessoa que retirou:</label>
-    <input id="nome" placeholder="Ex: João da Silva">
-
-    <label>Nome do item:</label>
-    <input id="item" placeholder="Ex: Sushi de Salmão">
-
-    <label>Quantidade:</label>
-    <input id="qtd" type="number" value="1" min="1">
-
-    <label>Valor unitário:</label>
-    <input id="valor" type="number" placeholder="Ex: 20.00" step="0.01">
-
-    <button onclick="adicionar()">Adicionar Item</button>
-
-    <p id="cliente" style="font-size:16pt; font-weight:bold; margin-top:10px;"></p>
-
-    <table id="lista">
-        <tr>
-            <th>QUANTIDADE</th>
-            <th>ITEM</th>
-            <th>VALOR</th>
-        </tr>
+    <p id="clienteRecibo"></p>
+    <table id="tabelaRecibo">
+        <tr><th>QUANTIDADE</th><th>ITEM</th><th>VALOR</th></tr>
     </table>
-
-    <p class="total" id="total">TOTAL: R$ 0,00</p>
-
-    <button onclick="imprimir()">IMPRIMIR NFC-e</button>
+    <p class="total" id="totalRecibo"></p>
 </div>
 
 <script>
 let total = 0;
 
 function adicionar() {
-    const nome = document.getElementById("nome").value.trim();
     const item = document.getElementById("item").value.trim();
     const qtd = Number(document.getElementById("qtd").value);
     const valor = Number(document.getElementById("valor").value);
 
-    if (!nome || !item || qtd <= 0 || valor <= 0) {
+    if (!item || qtd <=0 || valor <=0) {
         alert("Preencha todos os campos corretamente!");
         return;
     }
-
-    // Exibe o nome da pessoa
-    document.getElementById("cliente").innerText = "Cliente: " + nome;
 
     const subtotal = qtd * valor;
     total += subtotal;
@@ -68,13 +81,36 @@ function adicionar() {
 
     document.getElementById("total").innerText = "TOTAL: R$ " + total.toFixed(2);
 
-    // Limpar campos do item
+    // Limpar campos
     document.getElementById("item").value = "";
     document.getElementById("qtd").value = 1;
     document.getElementById("valor").value = "";
 }
 
 function imprimir() {
+    const nomeCliente = document.getElementById("nome").value.trim();
+    if (!nomeCliente) {
+        alert("Informe o nome do cliente antes de imprimir.");
+        return;
+    }
+
+    document.getElementById("clienteRecibo").innerText = "Cliente: " + nomeCliente;
+
+    // Limpa tabela do recibo antes de preencher
+    const tabelaRecibo = document.getElementById("tabelaRecibo");
+    tabelaRecibo.innerHTML = "<tr><th>QUANTIDADE</th><th>ITEM</th><th>VALOR</th></tr>";
+
+    const tabelaOriginal = document.getElementById("lista");
+    for (let i = 1; i < tabelaOriginal.rows.length; i++) { // pular cabeçalho
+        const linhaOrig = tabelaOriginal.rows[i];
+        const linhaRec = tabelaRecibo.insertRow();
+        linhaRec.insertCell(0).innerText = linhaOrig.cells[0].innerText;
+        linhaRec.insertCell(1).innerText = linhaOrig.cells[1].innerText;
+        linhaRec.insertCell(2).innerText = linhaOrig.cells[2].innerText;
+    }
+
+    document.getElementById("totalRecibo").innerText = "TOTAL: " + document.getElementById("total").innerText.replace("TOTAL: ", "");
+
     window.print();
 }
 </script>
