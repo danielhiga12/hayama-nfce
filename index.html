@@ -44,19 +44,21 @@
 
 <!-- Recibo oculto para impressão -->
 <div id="recibo" class="reciboPrint">
-    <h1>RETIRADA</h1>
-    <p id="nomeRecibo"></p>
-    <p id="dataHoraRecibo"></p>
+    <div class="reciboContent">
+        <h1>RETIRADA</h1>
+        <p id="nomeRecibo"></p>
+        <p id="dataHoraRecibo"></p>
 
-    <table id="tabelaRecibo">
-        <tr>
-            <th>QTD</th>
-            <th>ITEM</th>
-            <th>VALOR</th>
-        </tr>
-    </table>
+        <table id="tabelaRecibo">
+            <tr>
+                <th>QTD</th>
+                <th>ITEM</th>
+                <th>VALOR</th>
+            </tr>
+        </table>
 
-    <p class="total" id="totalRecibo"></p>
+        <p class="total" id="totalRecibo"></p>
+    </div>
 </div>
 
 <script>
@@ -95,10 +97,8 @@ function gerarRecibo() {
         return;
     }
 
-    // Nome do cliente
     document.getElementById("nomeRecibo").innerText = "Cliente: " + nome;
 
-    // Data e hora
     const now = new Date();
     const dia = String(now.getDate()).padStart(2,'0');
     const mes = String(now.getMonth()+1).padStart(2,'0');
@@ -107,7 +107,6 @@ function gerarRecibo() {
     const min = String(now.getMinutes()).padStart(2,'0');
     document.getElementById("dataHoraRecibo").innerText = `Data: ${dia}/${mes}/${ano} ${hora}:${min}`;
 
-    // Copia itens para recibo
     const tabelaOrig = document.getElementById("tabelaItens");
     const tabelaRecibo = document.getElementById("tabelaRecibo");
     tabelaRecibo.innerHTML = "<tr><th>QTD</th><th>ITEM</th><th>VALOR</th></tr>";
@@ -120,7 +119,6 @@ function gerarRecibo() {
         linhaRec.insertCell(2).innerText = linhaOrig.cells[2].innerText;
     }
 
-    // Total
     document.getElementById("totalRecibo").innerText = "TOTAL: R$ " + total.toFixed(2);
 
     window.print();
@@ -129,4 +127,3 @@ function gerarRecibo() {
 
 </body>
 </html>
-
