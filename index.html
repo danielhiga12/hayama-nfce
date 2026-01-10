@@ -10,7 +10,7 @@
 
 <div class="container">
 
-    <h2>Gerar Recibo NFC-e - Retirada</h2>
+    <h2>Gerar Recibo NFC-e – Retirada</h2>
 
     <label>Nome do cliente</label>
     <input id="nomeCliente" placeholder="Ex: João Silva">
@@ -80,8 +80,7 @@ function adicionar() {
     linha.insertCell(1).innerText = item;
     linha.insertCell(2).innerText = subtotal.toFixed(2);
 
-    document.getElementById("totalTela").innerText =
-        "TOTAL: R$ " + total.toFixed(2);
+    document.getElementById("totalTela").innerText = "TOTAL: R$ " + total.toFixed(2);
 
     document.getElementById("item").value = "";
     document.getElementById("qtd").value = 1;
@@ -95,8 +94,7 @@ function gerarRecibo() {
         return;
     }
 
-    document.getElementById("nomeRecibo").innerText =
-        "Cliente: " + nome;
+    document.getElementById("nomeRecibo").innerText = "Cliente: " + nome;
 
     const now = new Date();
     const dataHora =
@@ -106,14 +104,12 @@ function gerarRecibo() {
         String(now.getHours()).padStart(2, "0") + ":" +
         String(now.getMinutes()).padStart(2, "0");
 
-    document.getElementById("dataHoraRecibo").innerText =
-        "Data: " + dataHora;
+    document.getElementById("dataHoraRecibo").innerText = "Data: " + dataHora;
 
     const tabelaOrig = document.getElementById("tabelaItens");
     const tabelaRecibo = document.getElementById("tabelaRecibo");
 
-    tabelaRecibo.innerHTML =
-        "<tr><th>QTD</th><th>ITEM</th><th>VALOR</th></tr>";
+    tabelaRecibo.innerHTML = "<tr><th>QTD</th><th>ITEM</th><th>VALOR</th></tr>";
 
     for (let i = 1; i < tabelaOrig.rows.length; i++) {
         const linhaOrig = tabelaOrig.rows[i];
@@ -123,8 +119,7 @@ function gerarRecibo() {
         linha.insertCell(2).innerText = linhaOrig.cells[2].innerText;
     }
 
-    document.getElementById("totalRecibo").innerText =
-        "TOTAL: R$ " + total.toFixed(2);
+    document.getElementById("totalRecibo").innerText = "TOTAL: R$ " + total.toFixed(2);
 
     window.print();
 }
