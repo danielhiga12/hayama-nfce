@@ -46,6 +46,7 @@
 <div id="recibo" class="reciboPrint">
     <h1>RETIRADA</h1>
     <p id="nomeRecibo"></p>
+    <p id="dataHoraRecibo"></p>
 
     <table id="tabelaRecibo">
         <tr>
@@ -94,8 +95,19 @@ function gerarRecibo() {
         return;
     }
 
+    // Nome do cliente
     document.getElementById("nomeRecibo").innerText = "Cliente: " + nome;
 
+    // Data e hora
+    const now = new Date();
+    const dia = String(now.getDate()).padStart(2,'0');
+    const mes = String(now.getMonth()+1).padStart(2,'0');
+    const ano = now.getFullYear();
+    const hora = String(now.getHours()).padStart(2,'0');
+    const min = String(now.getMinutes()).padStart(2,'0');
+    document.getElementById("dataHoraRecibo").innerText = `Data: ${dia}/${mes}/${ano} ${hora}:${min}`;
+
+    // Copia itens para recibo
     const tabelaOrig = document.getElementById("tabelaItens");
     const tabelaRecibo = document.getElementById("tabelaRecibo");
     tabelaRecibo.innerHTML = "<tr><th>QTD</th><th>ITEM</th><th>VALOR</th></tr>";
@@ -108,6 +120,7 @@ function gerarRecibo() {
         linhaRec.insertCell(2).innerText = linhaOrig.cells[2].innerText;
     }
 
+    // Total
     document.getElementById("totalRecibo").innerText = "TOTAL: R$ " + total.toFixed(2);
 
     window.print();
