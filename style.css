@@ -3,37 +3,35 @@ body {
     background: #f2f2f2;
     padding: 20px;
 }
-.container {
-    max-width: 400px;
+.print {
+    max-width: 80mm;
     margin: auto;
     background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px;
 }
-h2 {
+h1 {
     text-align: center;
+    font-size: 22pt;
+    margin-bottom: 10px;
     color: #d32f2f;
 }
 label {
     display: block;
     margin-top: 10px;
+    font-size: 14pt;
 }
-input {
+input, button {
     width: 100%;
-    padding: 5px;
+    padding: 6px;
     margin-top: 5px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    font-size: 14pt;
 }
 button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
     background: #d32f2f;
     color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
 }
 button:hover {
@@ -42,23 +40,21 @@ button:hover {
 table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 16pt;
     margin-top: 10px;
 }
 th, td {
     border-bottom: 1px dashed #000;
-    padding: 4px;
+    padding: 5px;
     text-align: left;
 }
 .total {
-    text-align: right;
+    font-size: 18pt;
     font-weight: bold;
-    margin-top: 5px;
-}
-.data {
-    text-align: center;
+    text-align: right;
     margin-top: 10px;
 }
 @media print {
     body * { visibility: hidden; }
-    .print { visibility: visible; }
+    .print, .print * { visibility: visible; }
 }
