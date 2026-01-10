@@ -1,0 +1,60 @@
+body {
+    font-family: monospace;
+    background: #f2f2f2;
+    padding: 20px;
+}
+.container {
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h2 {
+    text-align: center;
+    color: #d32f2f;
+}
+input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background: #b71c1c;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td {
+    border-bottom: 1px dashed #000;
+    padding: 4px;
+    text-align: left;
+}
+.total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.data {
+    text-align: center;
+    margin-top: 10px;
+}
+@media print {
+    body * { visibility: hidden; }
+    .print { visibility: visible; }
+}
