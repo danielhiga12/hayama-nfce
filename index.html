@@ -11,6 +11,9 @@
 <div class="print">
     <h1>RETIRADA</h1>
 
+    <label>Nome da pessoa que retirou:</label>
+    <input id="nome" placeholder="Ex: João da Silva">
+
     <label>Nome do item:</label>
     <input id="item" placeholder="Ex: Sushi de Salmão">
 
@@ -21,6 +24,8 @@
     <input id="valor" type="number" placeholder="Ex: 20.00" step="0.01">
 
     <button onclick="adicionar()">Adicionar Item</button>
+
+    <p id="cliente" style="font-size:16pt; font-weight:bold; margin-top:10px;"></p>
 
     <table id="lista">
         <tr>
@@ -39,14 +44,18 @@
 let total = 0;
 
 function adicionar() {
+    const nome = document.getElementById("nome").value.trim();
     const item = document.getElementById("item").value.trim();
     const qtd = Number(document.getElementById("qtd").value);
     const valor = Number(document.getElementById("valor").value);
 
-    if (!item || qtd <= 0 || valor <= 0) {
+    if (!nome || !item || qtd <= 0 || valor <= 0) {
         alert("Preencha todos os campos corretamente!");
         return;
     }
+
+    // Exibe o nome da pessoa
+    document.getElementById("cliente").innerText = "Cliente: " + nome;
 
     const subtotal = qtd * valor;
     total += subtotal;
@@ -59,6 +68,7 @@ function adicionar() {
 
     document.getElementById("total").innerText = "TOTAL: R$ " + total.toFixed(2);
 
+    // Limpar campos do item
     document.getElementById("item").value = "";
     document.getElementById("qtd").value = 1;
     document.getElementById("valor").value = "";
