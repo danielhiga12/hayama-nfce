@@ -1,7 +1,7 @@
-/* FUNDO SUSHI - SITE PRINCIPAL */
+/* FUNDO SUSHI */
 body {
     font-family: monospace;
-    background-image: url("https://images.unsplash.com/photo-1553621042-f6e147245754");
+    background-image: url("ChatGPT Image 10 de jan. de 2026, 22_15_55.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -11,12 +11,12 @@ body {
 
 /* CONTAINER */
 .container {
-    max-width: 500px;
+    max-width: 520px;
     margin: auto;
-    background: rgba(255,255,255,0.92);
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    background: rgba(255,255,255,0.93);
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
 }
 
 /* INPUTS E BOTÕES */
@@ -30,14 +30,14 @@ input, button {
 }
 
 button {
-    background: #d32f2f;
+    background: #111;
     color: white;
-    border: none;
+    font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background: #b71c1c;
+    background: #000;
 }
 
 /* TABELAS */
@@ -60,10 +60,9 @@ th, td {
     font-size: 18pt;
     font-weight: bold;
     text-align: center;
-    color: black;
 }
 
-/* RECIBO OCULTO */
+/* RECIBO */
 .reciboPrint {
     position: absolute;
     left: -9999px;
