@@ -8,11 +8,11 @@
 </head>
 <body>
 
-<div class="print">
-    <h1>RETIRADA</h1>
+<div class="input-section">
+    <h2>Adicionar itens para NFC-e</h2>
 
     <label>Nome do cliente:</label>
-    <input id="nome" placeholder="Ex: João da Silva">
+    <input id="nomeCliente" placeholder="Ex: Ana Bezerra">
 
     <label>Nome do item:</label>
     <input id="item" placeholder="Ex: Sushi de Salmão">
@@ -25,54 +25,87 @@
 
     <button onclick="adicionar()">Adicionar Item</button>
 
-    <p id="clienteRecibo"></p>
-
-    <table id="lista">
+    <table id="tabelaItens">
         <tr>
-            <th>QUANTIDADE</th>
+            <th>QTD</th>
             <th>ITEM</th>
             <th>VALOR</th>
         </tr>
     </table>
 
-    <p class="total" id="total">TOTAL: R$ 0,00</p>
+    <p class="total" id="totalTela">TOTAL: R$ 0,00</p>
 
-    <button onclick="imprimir()">IMPRIMIR NFC-e</button>
+    <button onclick="gerarRecibo()">IMPRIMIR NFC-e</button>
+</div>
+
+<!-- Recibo oculto para impressão -->
+<div id="recibo" class="reciboPrint">
+    <h1>RETIRADA</h1>
+    <p id="nomeRecibo"></p>
+
+    <table id="tabelaRecibo">
+        <tr>
+            <th>QTD</th>
+            <th>ITEM</th>
+            <th>VALOR</th>
+        </tr>
+    </table>
+
+    <p class="total" id="totalRecibo"></p>
 </div>
 
 <script>
 let total = 0;
 
 function adicionar() {
-    const nome = document.getElementById("nome").value.trim();
     const item = document.getElementById("item").value.trim();
     const qtd = Number(document.getElementById("qtd").value);
     const valor = Number(document.getElementById("valor").value);
 
-    if (!nome || !item || qtd <= 0 || valor <= 0) {
+    if(!item || qtd <=0 || valor <=0) {
         alert("Preencha todos os campos corretamente!");
         return;
     }
 
-    document.getElementById("clienteRecibo").innerText = "Cliente: " + nome;
-
     const subtotal = qtd * valor;
     total += subtotal;
 
-    const tabela = document.getElementById("lista");
+    const tabela = document.getElementById("tabelaItens");
     const linha = tabela.insertRow();
     linha.insertCell(0).innerText = qtd;
     linha.insertCell(1).innerText = item;
     linha.insertCell(2).innerText = subtotal.toFixed(2);
 
-    document.getElementById("total").innerText = "TOTAL: R$ " + total.toFixed(2);
+    document.getElementById("totalTela").innerText = "TOTAL: R$ " + total.toFixed(2);
 
     document.getElementById("item").value = "";
     document.getElementById("qtd").value = 1;
     document.getElementById("valor").value = "";
 }
 
-function imprimir() {
+function gerarRecibo() {
+    const nome = document.getElementById("nomeCliente").value.trim();
+    if(!nome) {
+        alert("Informe o nome do cliente.");
+        return;
+    }
+
+    document.getElementById("nomeRecibo").innerText = "Cliente: " + nome;
+
+    const tabelaOrig = document.getElementById("tabelaItens");
+    const tabelaRecibo = document.getElementById("tabelaRecibo");
+    tabelaRecibo.innerHTML = "<tr><th>QTD</th><th>ITEM</th><th>VALOR</th></tr>";
+
+    for(let i=1;i<tabelaOrig.rows.length;i++){
+        const linhaOrig = tabelaOrig.rows[i];
+        const linhaRec = tabelaRecibo.insertRow();
+        linhaRec.insertCell(0).innerText = linhaOrig.cells[0].innerText;
+        linhaRec.insertCell(1).innerText = linhaOrig.cells[1].innerText;
+        linhaRec.insertCell(2).innerText = linhaOrig.cells[2].innerText;
+    }
+
+    document.getElementById("totalRecibo").innerText = "TOTAL: R$ " + total.toFixed(2);
+
     window.print();
 }
 </script>
