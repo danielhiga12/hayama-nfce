@@ -1,51 +1,69 @@
-/* Fundo sushi apenas na tela */
+/* FUNDO SUSHI - SITE PRINCIPAL */
 body {
     font-family: monospace;
-    background-image: url('https://images.unsplash.com/photo-1603052876340-4f4f6a0b74f0?fit=crop&w=800&q=80');
+    background-image: url("https://images.unsplash.com/photo-1553621042-f6e147245754");
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 20px;
 }
 
-/* Container principal */
+/* CONTAINER */
 .container {
     max-width: 500px;
     margin: auto;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.92);
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
-/* Inputs e botões */
+/* INPUTS E BOTÕES */
 input, button {
     width: 100%;
-    padding: 6px;
-    margin-top: 5px;
+    padding: 8px;
+    margin-top: 6px;
     font-size: 14pt;
-    border-radius: 4px;
+    border-radius: 6px;
     border: 1px solid #ccc;
 }
+
 button {
     background: #d32f2f;
     color: white;
     border: none;
     cursor: pointer;
 }
-button:hover { background: #b71c1c; }
 
-/* Tabela na tela */
+button:hover {
+    background: #b71c1c;
+}
+
+/* TABELAS */
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 16pt;
     margin-top: 10px;
+    font-size: 16pt;
 }
-th, td { border-bottom:1px dashed #000; padding:4px; text-align:center; color:black; }
 
-.total { font-size:18pt; font-weight:bold; text-align:center; margin-top:10px; color:black; }
+th, td {
+    border-bottom: 1px dashed #000;
+    padding: 4px;
+    text-align: center;
+    color: black;
+}
 
-/* Recibo oculto para impressão */
+.total {
+    margin-top: 10px;
+    font-size: 18pt;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+
+/* RECIBO OCULTO */
 .reciboPrint {
     position: absolute;
     left: -9999px;
@@ -53,30 +71,39 @@ th, td { border-bottom:1px dashed #000; padding:4px; text-align:center; color:bl
     width: 80mm;
     background: white;
     padding: 10px;
-    color:black;
-    text-align:center; /* centraliza tudo */
+    text-align: center;
+    color: black;
 }
 
 .reciboPrint h1 {
-    font-size:26pt;
-    margin-bottom:10px;
-    color:black;
+    font-size: 26pt;
+    margin-bottom: 8px;
 }
 
 #nomeRecibo, #dataHoraRecibo {
-    font-size:16pt;
-    font-weight:bold;
-    margin-bottom:5px;
-    color:black;
+    font-size: 16pt;
+    font-weight: bold;
 }
 
-/* Impressão */
+.agradecimento {
+    margin-top: 12px;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+/* IMPRESSÃO */
 @media print {
-    body * { visibility:hidden; }
+    body * {
+        visibility: hidden;
+    }
+
+    body {
+        background: none;
+    }
+
     .reciboPrint, .reciboPrint * {
         visibility: visible;
         position: static;
         opacity: 1;
     }
-    .reciboPrint { width:80mm; font-size:16pt; color:black; text-align:center; }
 }
