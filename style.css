@@ -1,17 +1,23 @@
+/* Fundo estilo sushi */
 body {
     font-family: monospace;
-    background: #f2f2f2;
+    background-image: url('https://images.unsplash.com/photo-1603052876340-4f4f6a0b74f0?fit=crop&w=800&q=80'); /* imagem de sushi */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     padding: 20px;
 }
 
-.input-section {
-    max-width: 400px;
+/* Container do site */
+.container {
+    max-width: 500px;
     margin: auto;
-    background: white;
-    padding: 10px;
-    border-radius: 5px;
+    background: rgba(255,255,255,0.9); /* leve transparência para ver o fundo */
+    padding: 15px;
+    border-radius: 10px;
 }
 
+/* Inputs e botões */
 input, button {
     width: 100%;
     padding: 6px;
@@ -29,51 +35,36 @@ button {
 }
 button:hover { background: #b71c1c; }
 
+/* Tabela de itens na tela */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
     font-size: 16pt;
-}
-
-th, td {
-    border-bottom: 1px dashed #000;
-    padding: 4px;
-    text-align: left;
-}
-
-.total {
-    font-size: 18pt;
-    font-weight: bold;
-    text-align: right;
     margin-top: 10px;
 }
+th, td { border-bottom:1px dashed #000; padding:4px; text-align:left; }
+
+.total { font-size:18pt; font-weight:bold; text-align:right; margin-top:10px; }
 
 /* Recibo para impressão */
 .reciboPrint {
-    display: none; /* invisível na tela */
+    display: none;
     max-width: 80mm;
     margin: auto;
     background: white;
     padding: 10px;
 }
-
 .reciboPrint h1 {
-    text-align: center;
-    font-size: 26pt;
-    color: #d32f2f;
-    margin-bottom: 10px;
+    text-align:center;
+    font-size:26pt;
+    color:#d32f2f;
+    margin-bottom:10px;
 }
+#nomeRecibo { font-size:16pt; text-align:center; font-weight:bold; margin-bottom:10px; }
 
-#nomeRecibo {
-    font-size: 16pt;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
+/* Impressão */
 @media print {
-    body * { visibility: hidden; }
-    .reciboPrint, .reciboPrint * { visibility: visible; }
-    .reciboPrint { width: 80mm; font-size: 16pt; }
+    body * { visibility:hidden; }
+    .reciboPrint, .reciboPrint * { visibility:visible; }
+    .reciboPrint { width:80mm; font-size:16pt; }
 }
