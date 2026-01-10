@@ -8,37 +8,41 @@
 </head>
 <body>
 
-<div class="input-section">
-    <h2>Adicionar itens para NFC-e</h2>
+<div class="container">
 
-    <label>Nome do cliente:</label>
-    <input id="nomeCliente" placeholder="Ex: Ana Bezerra">
+    <div class="input-section">
+        <h2>Adicionar itens para NFC-e</h2>
 
-    <label>Nome do item:</label>
-    <input id="item" placeholder="Ex: Sushi de Salmão">
+        <label>Nome do cliente:</label>
+        <input id="nomeCliente" placeholder="Ex: Ana Bezerra">
 
-    <label>Quantidade:</label>
-    <input id="qtd" type="number" value="1" min="1">
+        <label>Nome do item:</label>
+        <input id="item" placeholder="Ex: Sushi de Salmão">
 
-    <label>Valor unitário:</label>
-    <input id="valor" type="number" placeholder="Ex: 20.00" step="0.01">
+        <label>Quantidade:</label>
+        <input id="qtd" type="number" value="1" min="1">
 
-    <button onclick="adicionar()">Adicionar Item</button>
+        <label>Valor unitário:</label>
+        <input id="valor" type="number" placeholder="Ex: 20.00" step="0.01">
 
-    <table id="tabelaItens">
-        <tr>
-            <th>QTD</th>
-            <th>ITEM</th>
-            <th>VALOR</th>
-        </tr>
-    </table>
+        <button onclick="adicionar()">Adicionar Item</button>
 
-    <p class="total" id="totalTela">TOTAL: R$ 0,00</p>
+        <table id="tabelaItens">
+            <tr>
+                <th>QTD</th>
+                <th>ITEM</th>
+                <th>VALOR</th>
+            </tr>
+        </table>
 
-    <button onclick="gerarRecibo()">IMPRIMIR NFC-e</button>
+        <p class="total" id="totalTela">TOTAL: R$ 0,00</p>
+
+        <button onclick="gerarRecibo()">IMPRIMIR NFC-e</button>
+    </div>
+
 </div>
 
-<!-- Recibo oculto para impressão -->
+<!-- Recibo para impressão -->
 <div id="recibo" class="reciboPrint">
     <h1>RETIRADA</h1>
     <p id="nomeRecibo"></p>
