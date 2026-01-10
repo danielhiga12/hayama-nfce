@@ -9,8 +9,7 @@
 <body>
 
 <div class="container print">
-    <h2>HAYAMA SUSHI</h2>
-    <p style="text-align:center">RETIRADA NO BALCÃO</p>
+    <h2>RETIRADA</h2>
 
     <label>Nome do item:</label>
     <input id="item" placeholder="Ex: Sushi de Salmão">
@@ -23,12 +22,11 @@
 
     <button onclick="adicionar()">Adicionar Item</button>
 
-    <!-- Tabela dentro da div print para aparecer na impressão -->
     <table id="lista">
         <tr>
-            <th>Item</th>
-            <th>Qtd</th>
-            <th>Subtotal R$</th>
+            <th>QUANTIDADE</th>
+            <th>ITEM</th>
+            <th>VALOR</th>
         </tr>
     </table>
 
@@ -56,8 +54,8 @@ function adicionar() {
 
     const tabela = document.getElementById("lista");
     const linha = tabela.insertRow();
-    linha.insertCell(0).innerText = item;
-    linha.insertCell(1).innerText = qtd;
+    linha.insertCell(0).innerText = qtd;
+    linha.insertCell(1).innerText = item;
     linha.insertCell(2).innerText = subtotal.toFixed(2);
 
     document.getElementById("total").innerText = "TOTAL: R$ " + total.toFixed(2);
