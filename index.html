@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NFC-e Retirada - Hayama Sushi</title>
+<title>Recibo NFC-e - Hayama Sushi</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,9 +12,14 @@
     <h2>HAYAMA SUSHI</h2>
     <p style="text-align:center">RETIRADA NO BALCÃO</p>
 
-    <input id="item" placeholder="Item">
-    <input id="qtd" type="number" placeholder="Quantidade">
-    <input id="valor" type="number" placeholder="Valor unitário">
+    <label>Nome do item:</label>
+    <input id="item" placeholder="Ex: Sushi de Salmão">
+
+    <label>Quantidade:</label>
+    <input id="qtd" type="number" value="1" min="1">
+
+    <label>Valor unitário:</label>
+    <input id="valor" type="number" placeholder="Ex: 20.00" step="0.01">
 
     <button onclick="adicionar()">Adicionar Item</button>
 
@@ -22,7 +27,7 @@
         <tr>
             <th>Item</th>
             <th>Qtd</th>
-            <th>R$</th>
+            <th>Subtotal R$</th>
         </tr>
     </table>
 
@@ -40,7 +45,7 @@ function adicionar() {
     const qtd = Number(document.getElementById("qtd").value);
     const valor = Number(document.getElementById("valor").value);
 
-    if (!item || !qtd || !valor) {
+    if (!item || qtd <= 0 || valor <= 0) {
         alert("Preencha todos os campos corretamente!");
         return;
     }
@@ -58,7 +63,7 @@ function adicionar() {
 
     // Limpar campos
     document.getElementById("item").value = "";
-    document.getElementById("qtd").value = "";
+    document.getElementById("qtd").value = 1;
     document.getElementById("valor").value = "";
 }
 
