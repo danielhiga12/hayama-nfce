@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<div class="container print">
-    <h2>RETIRADA</h2>
+<div class="print">
+    <h1>RETIRADA</h1>
 
     <label>Nome do item:</label>
     <input id="item" placeholder="Ex: Sushi de Salmão">
@@ -31,7 +31,6 @@
     </table>
 
     <p class="total" id="total">TOTAL: R$ 0,00</p>
-    <p class="data" id="data"></p>
 
     <button onclick="imprimir()">IMPRIMIR NFC-e</button>
 </div>
@@ -60,17 +59,12 @@ function adicionar() {
 
     document.getElementById("total").innerText = "TOTAL: R$ " + total.toFixed(2);
 
-    // Limpar campos
     document.getElementById("item").value = "";
     document.getElementById("qtd").value = 1;
     document.getElementById("valor").value = "";
 }
 
 function imprimir() {
-    const dataElem = document.getElementById("data");
-    const now = new Date();
-    dataElem.innerText = "Data: " + now.toLocaleDateString() + " " + now.toLocaleTimeString();
-
     window.print();
 }
 </script>
