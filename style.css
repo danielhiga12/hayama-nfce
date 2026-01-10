@@ -1,7 +1,7 @@
 /* Fundo estilo sushi */
 body {
     font-family: monospace;
-    background-image: url('https://images.unsplash.com/photo-1603052876340-4f4f6a0b74f0?fit=crop&w=800&q=80'); 
+    background-image: url('https://images.unsplash.com/photo-1603052876340-4f4f6a0b74f0?fit=crop&w=800&q=80');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -45,11 +45,12 @@ th, td { border-bottom:1px dashed #000; padding:4px; text-align:left; }
 
 .total { font-size:18pt; font-weight:bold; text-align:right; margin-top:10px; }
 
-/* Recibo oculto para impressão */
+/* Recibo oculto para impressão - corrigido */
 .reciboPrint {
-    display: none;
-    max-width: 80mm;
-    margin: auto;
+    position: absolute;  /* fora da tela */
+    left: -9999px;
+    opacity: 0;
+    width: 80mm;
     background: white;
     padding: 10px;
 }
@@ -71,6 +72,10 @@ th, td { border-bottom:1px dashed #000; padding:4px; text-align:left; }
 /* Impressão */
 @media print {
     body * { visibility:hidden; }
-    .reciboPrint, .reciboPrint * { visibility:visible; }
+    .reciboPrint, .reciboPrint * {
+        visibility: visible;
+        position: static;
+        opacity: 1;
+    }
     .reciboPrint { width:80mm; font-size:16pt; }
 }
