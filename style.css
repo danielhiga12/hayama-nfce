@@ -1,11 +1,11 @@
-/* FUNDO SUSHI */
+/* FUNDO DO SITE */
 body {
     font-family: monospace;
     background-image: url("ChatGPT Image 10 de jan. de 2026, 22_15_55.png");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     background-attachment: fixed;
+    margin: 0;
     padding: 20px;
 }
 
@@ -13,7 +13,7 @@ body {
 .container {
     max-width: 520px;
     margin: auto;
-    background: rgba(255,255,255,0.93);
+    background: rgba(255,255,255,0.95);
     padding: 16px;
     border-radius: 14px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.45);
@@ -31,7 +31,7 @@ input, button {
 
 button {
     background: #111;
-    color: white;
+    color: #fff;
     font-weight: bold;
     cursor: pointer;
 }
@@ -45,19 +45,19 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    font-size: 16pt;
+    font-size: 14pt;
 }
 
 th, td {
     border-bottom: 1px dashed #000;
     padding: 4px;
     text-align: center;
-    color: black;
+    color: #000;
 }
 
 .total {
     margin-top: 10px;
-    font-size: 18pt;
+    font-size: 16pt;
     font-weight: bold;
     text-align: center;
 }
@@ -69,40 +69,43 @@ th, td {
     opacity: 0;
     width: 80mm;
     background: white;
-    padding: 10px;
-    text-align: center;
     color: black;
+    text-align: center;
+    font-size: 12pt;
+    line-height: 1.2;
 }
 
-.reciboPrint h1 {
-    font-size: 26pt;
-    margin-bottom: 8px;
-}
-
-#nomeRecibo, #dataHoraRecibo {
-    font-size: 16pt;
-    font-weight: bold;
-}
-
-.agradecimento {
-    margin-top: 12px;
-    font-size: 14pt;
-    font-weight: bold;
+/* CORTE */
+.espaco-corte {
+    height: 30mm;
 }
 
 /* IMPRESSÃO */
 @media print {
+    @page {
+        margin: 0;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: none;
+    }
+
     body * {
         visibility: hidden;
     }
 
-    body {
-        background: none;
+    .reciboPrint,
+    .reciboPrint * {
+        visibility: visible;
     }
 
-    .reciboPrint, .reciboPrint * {
-        visibility: visible;
-        position: static;
+    .reciboPrint {
+        position: absolute;
+        top: 0;
+        left: 0;
         opacity: 1;
+        padding: 4mm;
     }
 }
