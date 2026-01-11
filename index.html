@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recibo NFC-e - Hayama Sushi</title>
+<title>Recibo NFC-e – Hayama Sushi</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-
-    <h2>Gerar Recibo NFC-e – Retirada</h2>
+    <h2>Gerar Recibo – Retirada</h2>
 
     <label>Nome do cliente</label>
     <input id="nomeCliente" placeholder="Ex: João Silva">
@@ -22,9 +21,9 @@
     <input id="qtd" type="number" value="1" min="1">
 
     <label>Valor unitário</label>
-    <input id="valor" type="number" step="0.01" placeholder="Ex: 20.00">
+    <input id="valor" type="number" step="0.01" placeholder="Ex: 25.00">
 
-    <button onclick="adicionar()">Adicionar Item</button>
+    <button onclick="adicionar()">Adicionar item</button>
 
     <table id="tabelaItens">
         <tr>
@@ -37,12 +36,12 @@
     <p class="total" id="totalTela">TOTAL: R$ 0,00</p>
 
     <button onclick="gerarRecibo()">IMPRIMIR NFC-e</button>
-
 </div>
 
 <!-- RECIBO PARA IMPRESSÃO -->
 <div id="recibo" class="reciboPrint">
     <h1>RETIRADA</h1>
+
     <p id="nomeRecibo"></p>
     <p id="dataHoraRecibo"></p>
 
@@ -55,7 +54,10 @@
     </table>
 
     <p class="total" id="totalRecibo"></p>
+
     <p class="agradecimento">Obrigado pela preferência</p>
+
+    <div class="espaco-corte"></div>
 </div>
 
 <script>
@@ -80,7 +82,8 @@ function adicionar() {
     linha.insertCell(1).innerText = item;
     linha.insertCell(2).innerText = subtotal.toFixed(2);
 
-    document.getElementById("totalTela").innerText = "TOTAL: R$ " + total.toFixed(2);
+    document.getElementById("totalTela").innerText =
+        "TOTAL: R$ " + total.toFixed(2);
 
     document.getElementById("item").value = "";
     document.getElementById("qtd").value = 1;
@@ -104,22 +107,25 @@ function gerarRecibo() {
         String(now.getHours()).padStart(2, "0") + ":" +
         String(now.getMinutes()).padStart(2, "0");
 
-    document.getElementById("dataHoraRecibo").innerText = "Data: " + dataHora;
+    document.getElementById("dataHoraRecibo").innerText =
+        "Data: " + dataHora;
 
     const tabelaOrig = document.getElementById("tabelaItens");
     const tabelaRecibo = document.getElementById("tabelaRecibo");
 
-    tabelaRecibo.innerHTML = "<tr><th>QTD</th><th>ITEM</th><th>VALOR</th></tr>";
+    tabelaRecibo.innerHTML =
+        "<tr><th>QTD</th><th>ITEM</th><th>VALOR</th></tr>";
 
     for (let i = 1; i < tabelaOrig.rows.length; i++) {
-        const linhaOrig = tabelaOrig.rows[i];
-        const linha = tabelaRecibo.insertRow();
-        linha.insertCell(0).innerText = linhaOrig.cells[0].innerText;
-        linha.insertCell(1).innerText = linhaOrig.cells[1].innerText;
-        linha.insertCell(2).innerText = linhaOrig.cells[2].innerText;
+        const o = tabelaOrig.rows[i];
+        const l = tabelaRecibo.insertRow();
+        l.insertCell(0).innerText = o.cells[0].innerText;
+        l.insertCell(1).innerText = o.cells[1].innerText;
+        l.insertCell(2).innerText = o.cells[2].innerText;
     }
 
-    document.getElementById("totalRecibo").innerText = "TOTAL: R$ " + total.toFixed(2);
+    document.getElementById("totalRecibo").innerText =
+        "TOTAL: R$ " + total.toFixed(2);
 
     window.print();
 }
